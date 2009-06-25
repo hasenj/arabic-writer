@@ -17,15 +17,6 @@ class BidiString:
             result += segment.get_processed()
         return result
 
-if __name__ == "__main__":    
-    if 0:
-        test_string = u"تجربة test لكتابة عربية"
-        ltr = BidiString( test_string )
-        rtl = ltr.get_rtl()
-        print test_string
-        print rtl
+def rtlize(string):
+    return BidiString(string).get_rtl()
 
-    
-
-
-        
