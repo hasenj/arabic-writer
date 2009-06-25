@@ -5,6 +5,15 @@
 import wx
 from main import rtlize
 
+def CopyText( text):
+    """Set text into the system clipboard"""
+    ok = False
+    if wx.TheClipboard.Open():
+        wx.TheClipboard.SetData(wx.TextDataObject(text))
+        wx.TheClipboard.Close()
+        ok = True
+    return ok
+
 class MyFrame(wx.Frame):
     def __init__(self, parent, id, title):
         style = wx.MAXIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
@@ -19,23 +28,14 @@ class MyFrame(wx.Frame):
         inp_lbl = wx.StaticText(panel, pos=(10, 10), 
                 label=u'Write Here - اكتب هنا')
         inp = wx.TextCtrl(panel, pos=(40, 40), size=(700, 200))
-        oup = wx.TextCtrl(panel, pos=(40, 280), size=(700, 200))
-        oup.SetEditable(False)
 
         btn = wx.Button(panel, pos=(60, 540), size=(200, 80), label=u'Copy / نسخ')
         reset_btn = wx.Button(panel, pos=(270, 540), size=(200, 80), label=u'Reset / مسح')
         quit_btn = wx.Button(panel, pos=(540, 540), size=(200, 80), label=u'Quit / خروج')
 
-        def process(evt):
-            oup.SetValue( rtlize(inp.GetValue()) )
-            evt.Skip()
-
-        inp.Bind(wx.EVT_TEXT, process)
-
         def copy(evt):
-            oup.SelectAll()
-            oup.Copy()
-            oup.SetSelection(0,0)
+            rtl = rtlize(inp.GetValue())
+            copied = CopyText(rtl)
 
         btn.Bind(wx.EVT_BUTTON, copy)
 
