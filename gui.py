@@ -55,6 +55,6 @@ class MyFrame(wx.Frame):
         self.Show(True)
 
 app = wx.App(0)
-MyFrame(None, -1, u'المهئ الحر')
+MyFrame(None, -1, u'الرسام الحر')
 app.MainLoop()
 
