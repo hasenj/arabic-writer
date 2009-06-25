@@ -8,22 +8,28 @@ from main import rtlize
 class MyFrame(wx.Frame):
     def __init__(self, parent, id, title):
         style = wx.MAXIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
-        wx.Frame.__init__(self, parent, id, title, size=(750, 700), style = style)
+        wx.Frame.__init__(self, parent, id, title, size=(780, 700), style = style)
+
+        font = self.GetFont()
+        font.SetPointSize(14)
+        self.SetFont(font)
 
         panel = wx.Panel(self)
 
-        inp = wx.TextCtrl(panel, pos=(10, 10), size=(700, 200))
-        oup = wx.TextCtrl(panel, pos=(10, 220), size=(700, 200))
+        inp_lbl = wx.StaticText(panel, pos=(10, 10), 
+                label=u'Write Here - اكتب هنا')
+        inp = wx.TextCtrl(panel, pos=(40, 40), size=(700, 200))
+        oup = wx.TextCtrl(panel, pos=(40, 280), size=(700, 200))
         oup.SetEditable(False)
 
-        btn = wx.Button(panel, pos=(20, 450), size=(200, 80), label=u'نسخ')
+        btn = wx.Button(panel, pos=(60, 540), size=(200, 80), label=u'Copy / نسخ')
+        quit_btn = wx.Button(panel, pos=(360, 540), size=(200, 80), label=u'Quit / خروج')
 
         def process(evt):
             oup.SetValue( rtlize(inp.GetValue()) )
             evt.Skip()
 
-        inp.Bind(wx.EVT_KEY_DOWN, process)
-        inp.Bind(wx.EVT_KEY_UP, process)
+        inp.Bind(wx.EVT_TEXT, process)
 
         def copy(evt):
             oup.SelectAll()
@@ -31,6 +37,11 @@ class MyFrame(wx.Frame):
             oup.SetSelection(0,0)
 
         btn.Bind(wx.EVT_BUTTON, copy)
+
+        def quit(evt):
+            self.Close()
+
+        quit_btn.Bind(wx.EVT_BUTTON, quit)
 
         self.Centre()
         self.Show(True)
