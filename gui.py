@@ -23,7 +23,8 @@ class MyFrame(wx.Frame):
         oup.SetEditable(False)
 
         btn = wx.Button(panel, pos=(60, 540), size=(200, 80), label=u'Copy / نسخ')
-        quit_btn = wx.Button(panel, pos=(360, 540), size=(200, 80), label=u'Quit / خروج')
+        reset_btn = wx.Button(panel, pos=(270, 540), size=(200, 80), label=u'Reset / مسح')
+        quit_btn = wx.Button(panel, pos=(540, 540), size=(200, 80), label=u'Quit / خروج')
 
         def process(evt):
             oup.SetValue( rtlize(inp.GetValue()) )
@@ -37,6 +38,13 @@ class MyFrame(wx.Frame):
             oup.SetSelection(0,0)
 
         btn.Bind(wx.EVT_BUTTON, copy)
+
+        def reset(evt):
+            inp.SelectAll()
+            inp.Clear()
+            inp.SetSelection(0,0)
+
+        reset_btn.Bind(wx.EVT_BUTTON, reset)
 
         def quit(evt):
             self.Close()
