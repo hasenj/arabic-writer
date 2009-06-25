@@ -30,4 +30,5 @@ setup(
                 script='free_rassam.py', 
                 other_resources=[(24,1,manifest)]
                 )], 
-        options=dict(py2exe=dict(optimize=2, compressed=True, packages='wx')))
+        options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir="free_rassam",
+            bundle_files=1)))
