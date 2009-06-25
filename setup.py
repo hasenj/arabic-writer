@@ -31,4 +31,6 @@ setup(
                 other_resources=[(24,1,manifest)]
                 )], 
         options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir="free_rassam",
-            bundle_files=1)))
+            bundle_files=1)),
+        zipfile=None,
+        )
