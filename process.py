@@ -63,11 +63,12 @@ def mirror(string):
         return string[::-1]
     return string
 
+
 def rtlize(string):
     """Call this on a raw string, and it will process it"""
     segs = uni_segments(string)
     segs = [mirror(shape(seg)) for seg in segs]
-    return ''.join(segs)
+    return ''.join(segs[::-1])
 
 if __name__ == '__main__':
     print "Testing"

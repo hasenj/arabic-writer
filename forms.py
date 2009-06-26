@@ -47,6 +47,12 @@ def get_contextual_shape(prev, harf, next):
     elif prev_connection and not next_connection: return harf.final
     else: return harf.isolated 
 
+
+    
+merges = [
+        ('',''),
+        ]
+
 """
     Unicode codes acquired from:
         Standard forms (isolated):
@@ -60,6 +66,8 @@ def get_contextual_shape(prev, harf, next):
 # add_harf(standard, isolated, final, initial, medial, connects to previous?, connects to next?)
 
 add_harf(None, None, None, None, None, False, False)
+# Hamza-Alef groups
+add_harf(u'\u0623', u'\uFE83', u'\uFE84', u'\uFE83', u'\uFE83', True, False)
 # Main letters
 add_harf(u'\u0627', u'\uFE8D', u'\uFE8E', u'\uFE8D', u'\uFE8E', True, False)
 add_harf(u'\u0628', u'\uFE8F', u'\uFE90', u'\uFE91', u'\uFE92', True, True)
@@ -93,3 +101,4 @@ add_harf(u'\u064A', u'\uFEF1', u'\uFEF2', u'\uFEF3', u'\uFEF4', True, True)
 add_harf(u'\u0629', u'\uFE93', u'\uFE94', u'\uFE93', u'\uFE94', True,  False)
 # This one is problematic, as its medial form is not available, and it doesn't have an initial form, so for that I'm using the ـ kashida/tatweel 
 add_harf(u'\u0649', u'\uFEEF', u'\uFEF0', u'\u0640', u'\u0640', False, False) 
+
