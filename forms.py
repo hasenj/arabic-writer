@@ -2,6 +2,7 @@
     Author: Hasen il Judy
     License: GPL v2
 """
+
 class HarfShapes:
     """
         Forms of an arabic harf
@@ -24,7 +25,7 @@ def add_harf(*args):
     harf_list[harf.medial] = harf
     harf_list[harf.final] = harf
     
-def getHarf(char):
+def get_harf(char):
     try:
         return harf_list[char]
     except:
@@ -34,8 +35,11 @@ def is_harf(char):
     return ord(char) in range(0x0600, 0x06FF+1) or ord(char) in range(0xFE70, 0xFEFF+1) #numbers from unicode charts (links below)
 
 
-def get_contextual_shape(harf, prev, next):
+def get_contextual_shape(prev, harf, next):
     """return unicode representation of contextual shape"""
+    prev = get_harf(prev)
+    harf = get_harf(harf)
+    next = get_harf(next)
     next_connection = harf.next_connect and next.prev_connect
     prev_connection = harf.prev_connect and prev.next_connect
     if next_connection and prev_connection: return harf.medial

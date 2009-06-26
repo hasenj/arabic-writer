@@ -3,9 +3,9 @@
     License: GPL v2
 """
 import wx
-from main import rtlize
+from process import rtlize
 
-def CopyText( text):
+def CopyText(text):
     """Set text into the system clipboard"""
     ok = False
     if wx.TheClipboard.Open():
