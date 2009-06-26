@@ -62,7 +62,7 @@ def get_contextual_shape(prev, harf, next):
 add_harf(None, None, None, None, None, False, False)
 # Main letters
 add_harf(u'\u0627', u'\uFE8D', u'\uFE8E', u'\uFE8D', u'\uFE8E', True, False)
-add_harf(u'\u0628', u'\uFE8F', u'\uFE90', u'\uFE91', u'\uFE91', True, True)
+add_harf(u'\u0628', u'\uFE8F', u'\uFE90', u'\uFE91', u'\uFE92', True, True)
 add_harf(u'\u062A', u'\uFE95', u'\uFE96', u'\uFE97', u'\uFE98', True, True)
 add_harf(u'\u062B', u'\uFE99', u'\uFE9A', u'\uFE9B', u'\uFE9C', True, True)
 add_harf(u'\u062C', u'\uFE9D', u'\uFE9E', u'\uFE9F', u'\uFEA0', True, True)

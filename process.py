@@ -40,15 +40,15 @@ def uni_segments(string):
     segments = [""]
     dir = N
     for char in string:
-        if get_dir(char) == N:
-            segments += [char]
+        old_dir = dir
+        dir = get_dir(char)
+        if dir == N:
+            segments += [char] # New segment
         else:
-            old_dir = dir
-            dir = get_dir(char)
             if dir == old_dir:
-                segments[-1] += char
+                segments[-1] += char # Append to current segment
             else:
-                segments += [char]
+                segments += [char] # New segment
     return segments
         
 def shape(string):
