@@ -49,7 +49,7 @@ class MyFrame(wx.Frame):
 
         panel = wx.Panel(self)
 
-        inp = wx.TextCtrl(panel, pos=(40, 40), size=(700, 330))
+        inp = wx.TextCtrl(panel, pos=(40, 40), size=(700, 330), style=wx.TE_MULTILINE)
 
         btn = wx.Button(panel, pos=(60, 400), size=(200, 80), label=get_text("copy"))
         reset_btn = wx.Button(panel, pos=(270, 400), size=(200, 80), 
