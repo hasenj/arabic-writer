@@ -25,9 +25,11 @@ manifest = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </assembly>
 """
 
+main = 'free_rassam.py'
+
 setup(
         windows=[dict(
-                script='free_rassam.py', 
+                script=main, 
                 other_resources=[(24,1,manifest)]
                 )], 
         options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir="free_rassam",
