@@ -49,7 +49,9 @@ def get_contextual_shape(prev, harf, next):
 
 merges = [
         (u'\u0644\u0627',u'\uFEFB'), # لا
+        (u'\u0644\u0622',u'\uFEF5'), # لآ
         (u'\u0644\u0623',u'\uFEF7'), # لأ
+        (u'\u0644\u0625',u'\uFEF9'), # لإ
         ]
 
 def fuse(string):
@@ -108,9 +110,6 @@ def put_harakat(harakat_info, plain):
             plain = plain[1:]
         index += 1
     return res
-        
-
-
 
 """
     Unicode codes acquired from:
@@ -141,7 +140,9 @@ def add_non_connecting_harf(standard, isolated):
 add_harf(None, None, None, None, None, False, False)
 # Lam-Aleft
 add_non_connecting_harf(u'\uFEFB', u'\uFEFB')
+add_non_connecting_harf(u'\uFEF9', u'\uFEF9')
 add_non_connecting_harf(u'\uFEF7', u'\uFEF7')
+add_non_connecting_harf(u'\uFEF5', u'\uFEF5')
 # Hamza groups
 add_non_connecting_harf(u'\u0622', u'\uFE81')
 add_non_connecting_harf(u'\u0623', u'\uFE83')
@@ -179,6 +180,7 @@ add_non_connecting_harf(u'\u0648', u'\uFEED')
 add_connecting_harf(u'\u064A', u'\uFEF1')
 # Letters that are not directly in the alphabet
 add_non_connecting_harf(u'\u0629', u'\uFE93')
-# This one is problematic, as its medial form is not available, and it doesn't have an initial form, so for that I'm using the ـ kashida/tatweel 
-add_harf(u'\u0649', u'\uFEEF', u'\uFEF0', u'\u0640', u'\u0640', False, False) 
+add_non_connecting_harf(u'\u0649', u'\uFEEF')
+# tatweel
+add_harf(u'\u0640', u'\u0640', u'\u0640', u'\u0640', u'\u0640', True, True)
 

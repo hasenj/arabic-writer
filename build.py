@@ -28,12 +28,20 @@ manifest = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </dependency>
 </assembly>
 """
+
 main = 'free_rassam.py'
 dest = 'free_rassam'
-parser = OptionParser()
-parser.add_option('-E', '--english', dest='english', action='store_true', default=False)
-options, args = parser.parse_args()
 
+def do_exe():
+ setup(
+        windows=[dict(
+                script=main, 
+                other_resources=[(24,1,manifest)]
+                )], 
+        options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir=dest,
+            bundle_files=1)),
+        zipfile=None,
+        )   
 
 import sys
 sys.argv = [sys.argv[0]] + ["py2exe"]
@@ -43,25 +51,17 @@ import py2exe
 
 print "Arabic build: "
 print "--------------------"
-setup(
-        windows=[dict(
-                script=main, 
-                other_resources=[(24,1,manifest)]
-                )], 
-        options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir=dest,
-            bundle_files=1)),
-        zipfile=None,
-        )
+do_exe()
+
 print "\n"
 print "English build: "
 print "--------------------"
 main = 'free_rassam_eng.py'
-setup(
-        windows=[dict(
-                script=main, 
-                other_resources=[(24,1,manifest)]
-                )], 
-        options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir=dest,
-            bundle_files=1)),
-        zipfile=None,
-        )
+do_exe()
+
+import os
+print "\n"
+print "Creating 7z archive: "
+print "--------------------"
+os.system("7za a free_rassam.7z free_rassam")
+
