@@ -31,6 +31,7 @@ def get_dir(letter):
     Neutral characters don't have an intrinsic direction on their own, it depends
     on their context
     """
+    if letter is None: return N
     if forms.is_harf(letter): return R # Note: only checks for Arabic
     elif letter.isalpha(): return L # XXX: Test this, it should be the rest of unicode letters, not just English
     else: return N
@@ -44,16 +45,16 @@ def uni_segments(string):
     """
     segments = [""]
     dir = N
-    for char in string:
-        old_dir = dir
-        dir = get_dir(char)
-        if dir == N:
-            segments += [char] # New segment
+    prev = N
+    for context in iter_context(string):
+        _, char, _ = context
+        _, dir, next = [get_dir(c) for c in context]
+        if dir == prev or (dir == N and next in [N, prev]):
+            segments[-1] += char # Append to current segment
+            dir = prev
         else:
-            if dir == old_dir:
-                segments[-1] += char # Append to current segment
-            else:
-                segments += [char] # New segment
+            segments += [char] # New segment
+        prev = dir
     return segments
         
 def shape(string):
