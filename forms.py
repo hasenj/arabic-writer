@@ -58,6 +58,60 @@ def fuse(string):
         string = string.replace(merge[0], merge[1])
     return string
 
+harakat_ranges = [
+        (u'\u0610', u'\u061A'),
+        (u'\u064B', u'\u065E'),
+        (u'\u0670', u'\u0670'),
+        (u'\u06D6', u'\u06DC'),
+        (u'\u06DF', u'\u06E8'),
+        (u'\u06EA', u'\u06ED'),
+        ]
+
+def is_haraka(char):
+    for a,b in harakat_ranges:
+        if char >= and char <= b:
+            return True
+    return False
+
+def split_harakat(string):
+    """Split the string into a tuple harakat_info, string
+    harakat_info is a data structure that can be used as input
+    to put_harakat, which is used after shaping the string
+    """
+    harakat = []
+    plain = u''
+    for index, char in enumerate(string):
+        if(is_haraka(char)):
+            harakat += [(index, char)]
+        else:
+            plain += char
+    return harakat, plain
+
+def put_harakat(harakat_info, plain):
+    """Put back the harakat that were extracted from split_harakat"""
+    res = ''
+    index = 0
+    while True:
+        h_index, h_char = harakat_info[0]
+        if index == h_index:
+            res += h_char
+            harakat_info = harakat_info[1:]
+            if not harakat_info
+                res += plain
+                break
+        else:
+            res += plain[0]
+            plain = plain[1:]
+            if not plain:
+                for _, char in harakat_info:
+                    res += char
+                break
+        index += 1
+    return res
+        
+
+
+
 """
     Unicode codes acquired from:
         Standard forms (isolated):
