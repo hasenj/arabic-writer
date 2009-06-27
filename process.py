@@ -57,12 +57,25 @@ def uni_segments(string):
         prev = dir
     return segments
         
+def shape_plain(string):
+    """Substitute Arabic letters with a form that represents their shape
+    depending on their context.
+
+    Only works with plain text that has no harakat
+    """
+    if not string: return ''
+    return ''.join(forms.get_contextual_shape(*context) for context in iter_context(string))
+
 def shape(string):
     """Substitute Arabic letters with a form that represents their shape
     depending on their context.
+
+    wrapper around shape_plain that adds support for harakat
     """
-    if not string: return ""
-    return ''.join(forms.get_contextual_shape(*context) for context in iter_context(string))
+    if not string: return ''
+    harakat_info, plain = forms.split_harakat(string)
+    plain = shape_plain(plain)
+    return forms.put_harakat(harakat_info, plain)
 
 def mirror(string):
     """Assumes string is a uni-directional segment; reverses an R string"""
