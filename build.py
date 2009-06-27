@@ -52,7 +52,7 @@ setup(
             bundle_files=1)),
         zipfile=None,
         )
-print "\n\n"
+print "\n"
 print "English build: "
 print "--------------------"
 main = 'free_rassam_eng.py'
