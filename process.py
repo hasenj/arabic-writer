@@ -72,11 +72,15 @@ def mirror(string):
         return string[::-1]
     return string
 
-def rtlize(string):
-    """Call this on a raw string, and it will process it"""
+def rtlize_line(string):
+    string = forms.fuse(string)
     segs = uni_segments(string)
     segs = [mirror(shape(seg)) for seg in segs]
     return ''.join(segs[::-1])
+
+def rtlize(string):
+    """Call this on a raw string, and it will process it"""
+    return '\n'.join([rtlize_line(line) for line in string.splitlines()])
 
 if __name__ == '__main__':
     print "Testing"

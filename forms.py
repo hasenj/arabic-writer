@@ -47,11 +47,16 @@ def get_contextual_shape(prev, harf, next):
     elif prev_connection and not next_connection: return harf.final
     else: return harf.isolated 
 
-
-    
 merges = [
-        ('',''),
+        (u'\u0644\u0627',u'\uFEFB'), # لا
+        (u'\u0644\u0623',u'\uFEF7'), # لأ
         ]
+
+def fuse(string):
+    """Fuse together lam-alef sequences"""
+    for merge in merges:
+        string = string.replace(merge[0], merge[1])
+    return string
 
 """
     Unicode codes acquired from:
@@ -80,6 +85,9 @@ def add_non_connecting_harf(standard, isolated):
     add_harf(standard, isolated, final, initial, medial, True, False)
 
 add_harf(None, None, None, None, None, False, False)
+# Lam-Aleft
+add_non_connecting_harf(u'\uFEFB', u'\uFEFB')
+add_non_connecting_harf(u'\uFEF7', u'\uFEF7')
 # Hamza groups
 add_non_connecting_harf(u'\u0622', u'\uFE81')
 add_non_connecting_harf(u'\u0623', u'\uFE83')
