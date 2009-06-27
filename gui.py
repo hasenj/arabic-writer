@@ -20,8 +20,7 @@ t_text = dict(
             reset = 'Reset',
             quit = 'Quit',
             help = 'Help',
-            help_info = '''Write some Arabic text in the text box, then press Copy. A processed version of the text will be copied to the clipboard, which you can use to paste into any program that doesn't properly show Arabic text.
-            ''',
+            help_info = '''Write some Arabic text in the text box, press 'Copy', then paste in a program that doesn't support Arabic''',
                    )
         )
 
@@ -40,7 +39,7 @@ def CopyText(text):
 class MyFrame(wx.Frame):
     def __init__(self, parent, id, title):
         style = wx.MAXIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
-        wx.Frame.__init__(self, parent, id, title, size=(780, 580), style = style)
+        wx.Frame.__init__(self, parent, id, title, size=(780, 650), style = style)
 
         font = self.GetFont()
         font.SetPointSize(14)
@@ -50,7 +49,7 @@ class MyFrame(wx.Frame):
 
         panel = wx.Panel(self)
 
-        inp = wx.TextCtrl(panel, pos=(40, 40), size=(700, 200))
+        inp = wx.TextCtrl(panel, pos=(40, 40), size=(700, 330))
 
         btn = wx.Button(panel, pos=(60, 400), size=(200, 80), label=get_text("copy"))
         reset_btn = wx.Button(panel, pos=(270, 400), size=(200, 80), 
@@ -59,7 +58,7 @@ class MyFrame(wx.Frame):
                 label=get_text("quit"))
         help_btn = wx.Button(panel, pos=(150, 500), size=(500, 40), 
                 label=get_text("help")) 
-        help_text = wx.StaticText(panel, pos=(50, 240), size=(700, 150),
+        help_text = wx.StaticText(panel, pos=(50, 560), size=(700, 150),
                 label=get_text("help_info"))
         help_labels = [help_text]
 
