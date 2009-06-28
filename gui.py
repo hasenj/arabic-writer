@@ -4,6 +4,7 @@
 """
 import wx
 import os
+import webbrowser
 from process import rtlize
 
 language = 'arabic'
@@ -64,7 +65,7 @@ class MyFrame(wx.Frame):
 
         def show_help(evt=None):
             help_doc = get_text('help_doc')
-            os.system(os.path.join('docs', help_doc))
+            webbrowser.open(os.path.join('docs', help_doc))
         help_btn.Bind(wx.EVT_BUTTON, show_help)
 
         def copy(evt):

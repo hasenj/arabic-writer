@@ -1,6 +1,7 @@
 ﻿"""
     A Build script that relies on py2exe
 """
+import os
 
 # This is used to preserve XP/Vista look and feel
 # Don't ask me why, but without this, it will look ugly
@@ -28,8 +29,9 @@ manifest = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </assembly>
 """
 
-main = 'free_rassam.py'
-dest = 'free_rassam'
+main = 'free_ressam.py'
+dest = 'free_ressam'
+dest_7z = 'free_ressam.7z'
 
 def do_exe():
  setup(
@@ -48,6 +50,13 @@ sys.argv = [sys.argv[0]] + ["py2exe"]
 from distutils.core import setup
 import py2exe
 
+print "\n"
+print "Cleaning previous build"
+print "--------------------"
+os.system("rm " + dest) 
+os.system("rm " + dest_7z)
+
+print "\n"
 print "Arabic build: "
 print "--------------------"
 do_exe()
@@ -58,9 +67,16 @@ print "--------------------"
 main = 'free_rassam_eng.py'
 do_exe()
 
-import os
+print "\n"
+print "Copying docs: "
+print "--------------------"
+doc_dest = os.path.join(dest, "docs")
+os.system("mkdir " + doc_dest)
+os.system("cp docs " + doc_dest)
+
 print "\n"
 print "Creating 7z archive: "
 print "--------------------"
-os.system("7za a free_rassam.7z free_rassam")
+os.system("7za a " + dest_7z + " " + dest)
+
 
