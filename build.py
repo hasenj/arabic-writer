@@ -1,7 +1,6 @@
 ﻿"""
     A Build script that relies on py2exe
 """
-from optparse import OptionParser
 
 # This is used to preserve XP/Vista look and feel
 # Don't ask me why, but without this, it will look ugly

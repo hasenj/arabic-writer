@@ -3,24 +3,27 @@
     License: GPL v2
 """
 import wx
+import os
 from process import rtlize
 
 language = 'arabic'
 
 t_text = dict(
         arabic = dict(
+            title = u'الرسام الحر',
             copy = u'نسخ',
             reset = u'مسح',
             quit = u'خروج',
             help = u'تعليمات',
-            help_info = u'اكتب اي شيء في مربع النصوص ثم اضغط زر النسخ و بعدها الصق النص في اي برنامج لا يدعم اللغة العربية',
+            help_doc = 'help_arabic.html',
             ),
         english = dict(
+            title = 'The Free Ressam (Er Ressam il Hur)',
             copy = 'Copy',
             reset = 'Reset',
             quit = 'Quit',
             help = 'Help',
-            help_info = '''Write some Arabic text in the text box, press 'Copy', then paste in a program that doesn't support Arabic''',
+            help_doc = 'help_english.html',
                    )
         )
 
@@ -58,15 +61,11 @@ class MyFrame(wx.Frame):
                 label=get_text("quit"))
         help_btn = wx.Button(panel, pos=(150, 500), size=(500, 40), 
                 label=get_text("help")) 
-        help_text = wx.StaticText(panel, pos=(50, 560), size=(700, 150),
-                label=get_text("help_info"))
-        help_labels = [help_text]
 
-        def toggle_help(evt=None):
-            for label in help_labels:
-                label.Show(not label.IsShown())
-        help_btn.Bind(wx.EVT_BUTTON, toggle_help)
-        toggle_help()
+        def show_help(evt=None):
+            help_doc = get_text('help_doc')
+            os.system(os.path.join('docs', help_doc))
+        help_btn.Bind(wx.EVT_BUTTON, show_help)
 
         def copy(evt):
             rtl = rtlize(inp.GetValue())
@@ -88,7 +87,7 @@ class MyFrame(wx.Frame):
 
 def main():
     app = wx.App(0)
-    MyFrame(None, -1, u'الرسام الحر')
+    MyFrame(None, -1, get_text('title'))
     app.MainLoop()
 
 if __name__ == '__main__': main()
