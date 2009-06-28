@@ -37,7 +37,6 @@ def do_exe():
  setup(
         windows=[dict(
                 script = main, 
-                icon_resources = [(1, "icon.ico")],
                 other_resources = [(24,1,manifest)]
                 )], 
         options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir=dest,
@@ -48,6 +47,7 @@ def do_exe():
             ('docs', ['docs/help_arabic.html']),
             ('docs', ['docs/help_english.html']),
             ('docs', ['docs/technical.html']),
+            ('art', ['art/icon.ico']),
             ],
         )   
 

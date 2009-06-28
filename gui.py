@@ -45,6 +45,9 @@ class MyFrame(wx.Frame):
         style = wx.MAXIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
         wx.Frame.__init__(self, parent, id, title, size=(780, 650), style = style)
 
+        try: self.SetIcon(wx.Icon("art/icon.ico", wx.BITMAP_TYPE_ICO))
+        except: pass
+
         font = self.GetFont()
         font.SetPointSize(14)
         font.SetFaceName("Arial")
