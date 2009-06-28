@@ -9,7 +9,7 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="800"
+   width="500"
    height="500"
    id="svg2"
    sodipodi:version="0.32"
@@ -17,9 +17,9 @@
    version="1.0"
    sodipodi:docname="logo.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="C:\Users\aljudy\Desktop\logo.png"
-   inkscape:export-xdpi="30.01317"
-   inkscape:export-ydpi="30.01317">
+   inkscape:export-filename="C:\code\arabic_writer\docs\logo16.png"
+   inkscape:export-xdpi="2.8729842"
+   inkscape:export-ydpi="2.8729842">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -31,7 +31,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="224.14069"
+     inkscape:cx="-221.5736"
      inkscape:cy="263.93401"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -45,15 +45,15 @@
     <marker
        inkscape:stockid="Arrow1Lstart"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="Arrow1Lstart"
        style="overflow:visible">
       <path
          id="path3307"
-         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
-         transform="scale(0.8) translate(12.5,0)" />
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
     </marker>
     <linearGradient
        id="linearGradient5005"
@@ -163,38 +163,46 @@
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
     <flowRoot
-       transform="matrix(2.868303,0,0,2.868303,-221.47243,-310.62624)"
-       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#3a5f33;fill-opacity:0.88297873999999998;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Andalus;-inkscape-font-specification:Andalus;fill-rule:evenodd"
+       transform="matrix(2.868303,0,0,2.868303,-415.75815,-347.7691)"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#3a5f33;fill-opacity:0.88297873;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Andalus;-inkscape-font-specification:Andalus"
        id="flowRoot2383"
        xml:space="preserve"><flowRegion
          style="stroke:url(#linearGradient5011)"
          id="flowRegion2385"><rect
-           style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;font-family:Andalus;-inkscape-font-specification:Andalus;fill:#3a5f33;fill-opacity:0.88297873999999998;stroke:none;stroke-opacity:1;fill-rule:evenodd"
+           style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#3a5f33;fill-opacity:0.88297873;fill-rule:evenodd;stroke:none;stroke-opacity:1;font-family:Andalus;-inkscape-font-specification:Andalus"
            y="160"
            x="165.71428"
            height="54.812374"
            width="96.122612"
            id="rect2387" /></flowRegion><flowPara
-         style="stroke:none;stroke-opacity:1;fill-rule:evenodd;fill:#3a5f33;fill-opacity:0.88297873999999998"
+         style="fill:#3a5f33;fill-opacity:0.88297873;fill-rule:evenodd;stroke:none;stroke-opacity:1"
          id="flowPara2391">الرسام</flowPara></flowRoot>    <text
        sodipodi:linespacing="125%"
        id="text2393"
-       y="366.70834"
-       x="260.18344"
-       style="font-size:265.02587891000002000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;fill:#000d36;fill-opacity:0.84574466999999998;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-opacity:1;font-family:Traditional Arabic;-inkscape-font-specification:Traditional Arabic;stroke-miterlimit:4;stroke-dasharray:3, 1;stroke-dashoffset:0;opacity:1"
+       y="329.56546"
+       x="65.897728"
+       style="font-size:265.02587891px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#000d36;fill-opacity:0.84574465;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:3, 1;stroke-dashoffset:0;stroke-opacity:1;font-family:Traditional Arabic;-inkscape-font-specification:Traditional Arabic"
        xml:space="preserve"><tspan
-         y="366.70834"
-         x="260.18344"
+         y="329.56546"
+         x="65.897728"
          id="tspan2397"
          sodipodi:role="line">الحـر</tspan></text>
     <rect
-       style="opacity:0.14899999999999999;fill:#082992;fill-opacity:0.55319147999999996;fill-rule:evenodd;stroke:#0ca159;stroke-width:1.22100007000000010;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter5569)"
+       style="opacity:0.14899998;fill:#082992;fill-opacity:0.55319148;fill-rule:evenodd;stroke:#0ca159;stroke-width:1.22100008;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter5569)"
        id="rect5547"
        width="342.72067"
        height="237.02177"
        x="321.97504"
        y="-99.776581"
        ry="57.653954"
-       transform="matrix(0.853761,0.520665,-0.520665,0.853761,0,0)" />
+       transform="matrix(0.853761,0.520665,-0.520665,0.853761,-194.28572,-37.142858)" />
+    <rect
+       style="opacity:0;fill:#082992;fill-opacity:0.55319147999999996;fill-rule:evenodd;stroke:#0ca159;stroke-width:1.22099996000000010;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2426"
+       width="500"
+       height="497.14285"
+       x="0"
+       y="2.8571429"
+       ry="57.65395" />
   </g>
 </svg>

@@ -36,12 +36,19 @@ dest_7z = 'free_ressam.7z'
 def do_exe():
  setup(
         windows=[dict(
-                script=main, 
-                other_resources=[(24,1,manifest)]
+                script = main, 
+                icon_resources = [(1, "icon.ico")],
+                other_resources = [(24,1,manifest)]
                 )], 
         options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir=dest,
             bundle_files=1)),
-        zipfile=None,
+        zipfile = None,
+        data_files = [ 
+            ('docs', ['docs/logo.png']),
+            ('docs', ['docs/help_arabic.html']),
+            ('docs', ['docs/help_english.html']),
+            ('docs', ['docs/technical.html']),
+            ],
         )   
 
 import sys
@@ -53,7 +60,7 @@ import py2exe
 print "\n"
 print "Cleaning previous build"
 print "--------------------"
-os.system("rm " + dest) 
+os.system("rm -rf " + dest) 
 os.system("rm " + dest_7z)
 
 print "\n"
@@ -64,15 +71,15 @@ do_exe()
 print "\n"
 print "English build: "
 print "--------------------"
-main = 'free_rassam_eng.py'
+main = 'free_ressam_eng.py'
 do_exe()
 
-print "\n"
-print "Copying docs: "
-print "--------------------"
-doc_dest = os.path.join(dest, "docs")
-os.system("mkdir " + doc_dest)
-os.system("cp docs " + doc_dest)
+#print "\n"
+#print "Copying docs: "
+#print "--------------------"
+#doc_dest = os.path.join(dest, "docs")
+#os.system("mkdir " + doc_dest)
+#os.system("cp -r docs " + doc_dest)
 
 print "\n"
 print "Creating 7z archive: "
