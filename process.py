@@ -83,6 +83,9 @@ def mirror(string):
     if not string: return ""
     dir = get_dir(string[0])
     if dir == R:
+        # Fix parenthesis
+        swap = { '(':')', '[':']', '{':'}', ')':'(', ']':'[', '}':'{' }
+        string = ''.join((swap.get(char,char) for char in string))
         return string[::-1]
     return string
 
