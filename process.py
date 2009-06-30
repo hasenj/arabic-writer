@@ -32,6 +32,7 @@ def get_dir(letter):
     on their context
     """
     if letter is None: return N
+    if letter.isdigit(): return L
     if forms.is_harf(letter): return R # Note: only checks for Arabic
     elif letter.isalpha(): return L # XXX: Test this, it should be the rest of unicode letters, not just English
     else: return N
@@ -93,7 +94,7 @@ def rtlize_line(string):
 
 def rtlize(string):
     """Call this on a raw string, and it will process it"""
-    return '\n'.join([rtlize_line(line) for line in string.splitlines()])
+    return '\r\n'.join([rtlize_line(line) for line in string.splitlines()])
 
 if __name__ == '__main__':
     print "Testing"
