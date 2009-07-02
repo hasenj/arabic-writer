@@ -31,6 +31,19 @@ def get_text(name):
     """Basic (read: naive) mechanism for multi-language UI"""
     return t_text[language][name]
 
+shortcuts = dict(
+        copy = 'Ctrl+T',
+        reset = 'Ctrl+E',
+        quit = 'Ctrl+W',
+        inplace = 'Ctrl+R',
+        )
+
+def get_shortcut(name):
+    return shortcuts[name]
+
+def tooltip(widget, name):
+    widget.setToolTip(u"%s %s" % (get_text(name), get_shortcut(name)))
+
 def setClipboardText(text):
     app = QtGui.QApplication.instance()
     clipboard = app.clipboard()
@@ -48,7 +61,8 @@ def main():
     window.setWindowIcon(QtGui.QIcon('art/icon.png'))
 
     vbox = QtGui.QVBoxLayout()
-    hbox = QtGui.QHBoxLayout()
+    hbox1 = QtGui.QHBoxLayout()
+    hbox2 = QtGui.QHBoxLayout()
     edithbox = QtGui.QHBoxLayout()
 
     textArea = QtGui.QTextEdit()
@@ -78,8 +92,12 @@ def main():
     inplaceBtn.setMinimumSize(200, 80)
     window.connect(inplaceBtn, QtCore.SIGNAL('clicked()'), process_inplace)
 
+    quitBtn = QtGui.QPushButton(get_text('quit'))
+    quitBtn.setMinimumSize(200, 80)
+    window.connect(quitBtn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
+
     helpBtn = QtGui.QPushButton(get_text('help'))
-    helpBtn.setMinimumSize(200, 80)
+    helpBtn.setMinimumSize(400, 40)
     window.connect(helpBtn, QtCore.SIGNAL('clicked()'), help)
 
     clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), 
@@ -119,16 +137,21 @@ def main():
     edithbox.addWidget(textArea)
     edithbox.addWidget(smallBar)
 
-    hbox.addStretch(2)
-    hbox.addWidget(copyBtn)
-    hbox.addWidget(inplaceBtn)
-    hbox.addStretch(1)
-    hbox.addWidget(helpBtn)
-    hbox.addStretch(4)
+    hbox1.addStretch(1)
+    hbox1.addWidget(copyBtn)
+    hbox1.addWidget(inplaceBtn)
+    hbox1.addStretch(2)
+    hbox1.addWidget(quitBtn)
+    hbox1.addStretch(1)
+
+    hbox2.addStretch(1)
+    hbox2.addWidget(helpBtn)
+    hbox2.addStretch(1)
 
     vbox.addLayout(edithbox)
     vbox.addSpacing(20)
-    vbox.addLayout(hbox)
+    vbox.addLayout(hbox1)
+    vbox.addLayout(hbox2)
 
     window.setLayout(vbox)
     window.show()
