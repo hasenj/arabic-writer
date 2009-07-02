@@ -55,6 +55,7 @@ def uni_segments(string):
             dir = prev
         else:
             segments += [char] # New segment
+            dir = next
         prev = dir
     return segments
         

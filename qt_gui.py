@@ -41,7 +41,6 @@ def setClipboardText(text):
     clipboard.setText(text)
     event = QtCore.QEvent(QtCore.QEvent.Clipboard)
     app.sendEvent(clipboard, event)
-    app.processEvents()
 
 window = QtGui.QWidget()
 window.resize(450, 250)
@@ -60,9 +59,7 @@ smallBar.setOrientation(QtCore.Qt.Vertical)
 def copy():
     text = unicode(textArea.toPlainText())
     rtl = rtlize(text)
-    # setClipboardText(rtl)
-    outText.setText(rtl)
-    outText.copy()
+    setcbtext(rtl)
 
 def process_inplace():
     text = unicode(textArea.toPlainText())
