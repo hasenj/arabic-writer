@@ -30,7 +30,26 @@
 </style>
 <img class="logo" src="logo.png"/>
 <h1> The Free Ressam (Er Ressam il Hur) </h1>
+<h2>Introduction</h2>
+<p>
+    Some programs don't properly support the display of Arabic text:<br>
+    Letters appear disconnected, and are displayed from left to right, as if
+    they were Roman characters. In other words, such programs don't process
+    Arabic text before displaying it. <br><br>
 
+    To work around this problem, some people use the character map and 
+    hand-pick shaped Arabic characters. I know people used to do that
+    with online games such as Counter-Strike, to write their nicknames
+    in Arabic. <br><br>
+
+    The Free Ressam is a solution to automate this process; instead of hand-picking
+    the correct character forms from a character-map like program, you just
+    enter the text you want (which could be mixed Arabic and English, and even numbers or other languages), and the Free Ressam will produce from it a string
+    that's suitable to enter into a program that supports unicode but doesn't
+    support the display of Arabic text. <br><br>
+
+    There's more technical explanation in <a href="technical.html">technical.html</a>.
+</p>
 <h2>Usage Instructions:</h2>
 <h3>The basics:</h3>
 <p>Write some text in the given text box, press copy, then go and paste the text into a program that does not support proper rendering of Arabic text</p>
@@ -39,7 +58,7 @@
 <p>You can write short text, it could be mixed Arabic/English, but it has to be short enough to not wrap across lines. If the target program wraps the text across several lines, the first line will be at the bottom, and the last line at the top. To work around this, divide the text into several lines manually inside The Free Ressam, before pressing the "Copy" button.</p>
 
 <h3>How does it work? Why aren't some fonts or programs supported?</h3>
-<p>The Free Ressam takes advantage of the unicode specification, to convert arabic letters into their presentation forms. There's more technical explanation in <a href="technical.html">technical.html</a>.<br><br>
+<p>The Free Ressam takes advantage of the unicode specification, to convert arabic letters into their presentation forms, see the Introduction. <br><br>
 For the text to appear correctly on the target program, it must support unicode. If the target program does not support unicode, then there's nothing we can do about it.<br><br>
 Unfortunately, some thid-party fonts can't render the text in its converted format, again, there is nothing we can do about that. All system fonts should work fine, though.
 </p>
