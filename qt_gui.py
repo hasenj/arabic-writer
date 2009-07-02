@@ -32,6 +32,7 @@ def get_text(name):
     return t_text[language][name]
 
 def setClipboardText(text):
+    app = QtGui.QApplication.instance()
     clipboard = app.clipboard()
     clipboard.setText(text)
     event = QtCore.QEvent(QtCore.QEvent.Clipboard)
@@ -42,7 +43,7 @@ def main():
     app.setLayoutDirection(QtCore.Qt.RightToLeft)
 
     window = QtGui.QWidget()
-    window.resize(450, 250)
+    window.resize(750, 350)
     window.setWindowTitle(get_text('title'))
     window.setWindowIcon(QtGui.QIcon('art/icon.png'))
 
@@ -54,6 +55,10 @@ def main():
     outText = QtGui.QTextEdit()
     smallBar = QtGui.QToolBar()
     smallBar.setOrientation(QtCore.Qt.Vertical)
+
+    def help():
+        help_doc = get_text('help_doc')
+        webbrowser.open(os.path.join('docs', help_doc))
 
     def copy():
         text = unicode(textArea.toPlainText())
@@ -86,6 +91,12 @@ def main():
     copyAction.setShortcut('Ctrl+T')
     window.connect(copyAction, QtCore.SIGNAL('triggered()'), copy)
 
+    helpAction = QtGui.QAction(QtGui.QIcon('art/help.png'), 
+            get_text('help'), smallBar)
+    helpAction.setShortcut('Ctrl+H')
+    helpAction.setShortcut('F1')
+    window.connect(helpAction, QtCore.SIGNAL('triggered()'), help)
+
     quitAction = QtGui.QAction(QtGui.QIcon('art/quit.png'),
             get_text('quit'), smallBar)
     quitAction.setShortcut('Ctrl+W')
@@ -96,6 +107,7 @@ def main():
     smallBar.addAction(inplaceAction)
     smallBar.addAction(copyAction)
     smallBar.addAction(quitAction)
+    smallBar.addAction(helpAction)
 
     edithbox.addWidget(textArea)
     edithbox.addWidget(smallBar)

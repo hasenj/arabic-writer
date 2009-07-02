@@ -39,15 +39,27 @@ def do_exe():
                 script = main, 
                 other_resources = [(24,1,manifest)]
                 )], 
-        options=dict(py2exe=dict(optimize=2, compressed=True, dist_dir=dest,
-            bundle_files=1)),
+        options=dict(
+            py2exe=dict(
+                optimize=2, 
+                includes=['sip'],
+                compressed=True, 
+                dist_dir=dest,
+                bundle_files=1
+                )),
         zipfile = None,
         data_files = [ 
             ('docs', ['docs/logo.png']),
             ('docs', ['docs/help_arabic.html']),
             ('docs', ['docs/help_english.html']),
-            ('docs', ['docs/technical.html']),
-            ('art', ['art/icon.ico']),
+            ('docs', ['docs/technical_arabic.html']),
+            ('docs', ['docs/technical_english.html']),
+            ('art', ['art/icon.png']),
+            ('art', ['art/help.png']),
+            ('art', ['art/clear.png']),
+            ('art', ['art/copy.png']),
+            ('art', ['art/inplace.png']),
+            ('art', ['art/quit.png']),
             ],
         )   
 
