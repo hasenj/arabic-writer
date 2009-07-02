@@ -34,7 +34,6 @@ def get_text(name):
 app = QtGui.QApplication(sys.argv)
 app.setLayoutDirection(QtCore.Qt.RightToLeft)
 
-# XXX: doesn't work right ..
 def setClipboardText(text):
     clipboard = app.clipboard()
     clipboard.setText(text)
@@ -71,12 +70,24 @@ copyBtn = QtGui.QPushButton(get_text('copy'))
 window.connect(copyBtn, QtCore.SIGNAL('clicked()'), copy)
 
 clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), get_text('reset'), smallBar)
+clearAction.setShortcut('Ctrl+E')
 window.connect(clearAction, QtCore.SIGNAL('triggered()'), textArea, QtCore.SLOT('clear()'))
 inplaceAction = QtGui.QAction(QtGui.QIcon('art/inplace.png'), get_text('inplace'), smallBar)
 inplaceAction.setShortcut('Ctrl+R')
 window.connect(inplaceAction, QtCore.SIGNAL('triggered()'), process_inplace)
+
+copyAction = QtGui.QAction(QtGui.QIcon('art/copy.png'), get_text('copy'), smallBar)
+copyAction.setShortcut('Ctrl+T')
+window.connect(copyAction, QtCore.SIGNAL('triggered()'), app, QtCore.SLOT('quit()'))
+
+quitAction = QtGui.QAction(QtGui.QIcon('art/quit.png'), get_text('quit'), smallBar)
+quitAction.setShortcut('Ctrl+W')
+window.connect(quitAction, QtCore.SIGNAL('triggered()'), app, QtCore.SLOT('quit()'))
+
 smallBar.addAction(clearAction)
 smallBar.addAction(inplaceAction)
+smallBar.addAction(copyAction)
+smallBar.addAction(quitAction)
 
 edithbox.addWidget(textArea)
 edithbox.addWidget(smallBar)
