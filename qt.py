@@ -46,7 +46,7 @@ def setClipboardText(text):
 
 window = QtGui.QWidget()
 window.resize(450, 250)
-window.setWindowTitle('Qt Window')
+window.setWindowTitle(get_text('title'))
 window.setWindowIcon(QtGui.QIcon('art/icon.png'))
 
 vbox = QtGui.QVBoxLayout()
@@ -55,7 +55,7 @@ edithbox = QtGui.QHBoxLayout()
 
 textArea = QtGui.QTextEdit()
 smallBar = QtGui.QToolBar()
-# smallBar.setOrientation(QtGui.QOrientation.Vertical)
+smallBar.setOrientation(QtCore.Qt.Vertical)
 
 def copy():
     text = unicode(textArea.toPlainText())
@@ -75,6 +75,7 @@ window.connect(quitBtn, QtCore.SIGNAL('clicked()'), copy)
 clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), get_text('reset'), smallBar)
 window.connect(clearAction, QtCore.SIGNAL('triggered()'), textArea, QtCore.SLOT('clear()'))
 inplaceAction = QtGui.QAction(QtGui.QIcon('art/inplace.png'), get_text('inplace'), smallBar)
+inplaceAction.setShortcut('Ctrl+R')
 window.connect(inplaceAction, QtCore.SIGNAL('triggered()'), process_inplace)
 smallBar.addAction(clearAction)
 smallBar.addAction(inplaceAction)
@@ -94,5 +95,5 @@ window.setLayout(vbox)
 window.show()
 
 exit_code = app.exec_()
-# sys.exit(exit_code)
+sys.exit(exit_code)
 
