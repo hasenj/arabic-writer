@@ -31,78 +31,88 @@ def get_text(name):
     """Basic (read: naive) mechanism for multi-language UI"""
     return t_text[language][name]
 
-app = QtGui.QApplication(sys.argv)
-app.setLayoutDirection(QtCore.Qt.RightToLeft)
-
 def setClipboardText(text):
     clipboard = app.clipboard()
     clipboard.setText(text)
     event = QtCore.QEvent(QtCore.QEvent.Clipboard)
     app.sendEvent(clipboard, event)
 
-window = QtGui.QWidget()
-window.resize(450, 250)
-window.setWindowTitle(get_text('title'))
-window.setWindowIcon(QtGui.QIcon('art/icon.png'))
+def main():
+    app = QtGui.QApplication(sys.argv)
+    app.setLayoutDirection(QtCore.Qt.RightToLeft)
 
-vbox = QtGui.QVBoxLayout()
-hbox = QtGui.QHBoxLayout()
-edithbox = QtGui.QHBoxLayout()
+    window = QtGui.QWidget()
+    window.resize(450, 250)
+    window.setWindowTitle(get_text('title'))
+    window.setWindowIcon(QtGui.QIcon('art/icon.png'))
 
-textArea = QtGui.QTextEdit()
-outText = QtGui.QTextEdit()
-smallBar = QtGui.QToolBar()
-smallBar.setOrientation(QtCore.Qt.Vertical)
+    vbox = QtGui.QVBoxLayout()
+    hbox = QtGui.QHBoxLayout()
+    edithbox = QtGui.QHBoxLayout()
 
-def copy():
-    text = unicode(textArea.toPlainText())
-    rtl = rtlize(text)
-    setClipboardText(rtl)
+    textArea = QtGui.QTextEdit()
+    outText = QtGui.QTextEdit()
+    smallBar = QtGui.QToolBar()
+    smallBar.setOrientation(QtCore.Qt.Vertical)
 
-def process_inplace():
-    text = unicode(textArea.toPlainText())
-    rtl = rtlize(text)
-    textArea.setText(rtl)
-quitBtn = QtGui.QPushButton(get_text('quit'))
-window.connect(quitBtn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
+    def copy():
+        text = unicode(textArea.toPlainText())
+        rtl = rtlize(text)
+        setClipboardText(rtl)
 
-copyBtn = QtGui.QPushButton(get_text('copy'))
-window.connect(copyBtn, QtCore.SIGNAL('clicked()'), copy)
+    def process_inplace():
+        text = unicode(textArea.toPlainText())
+        rtl = rtlize(text)
+        textArea.setText(rtl)
+    quitBtn = QtGui.QPushButton(get_text('quit'))
+    window.connect(quitBtn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
 
-clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), get_text('reset'), smallBar)
-clearAction.setShortcut('Ctrl+E')
-window.connect(clearAction, QtCore.SIGNAL('triggered()'), textArea, QtCore.SLOT('clear()'))
-inplaceAction = QtGui.QAction(QtGui.QIcon('art/inplace.png'), get_text('inplace'), smallBar)
-inplaceAction.setShortcut('Ctrl+R')
-window.connect(inplaceAction, QtCore.SIGNAL('triggered()'), process_inplace)
+    copyBtn = QtGui.QPushButton(get_text('copy'))
+    window.connect(copyBtn, QtCore.SIGNAL('clicked()'), copy)
 
-copyAction = QtGui.QAction(QtGui.QIcon('art/copy.png'), get_text('copy'), smallBar)
-copyAction.setShortcut('Ctrl+T')
-window.connect(copyAction, QtCore.SIGNAL('triggered()'), app, QtCore.SLOT('quit()'))
+    clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), 
+            get_text('reset'), smallBar)
+    clearAction.setShortcut('Ctrl+E')
+    window.connect(clearAction, QtCore.SIGNAL('triggered()'),
+            textArea, QtCore.SLOT('clear()'))
 
-quitAction = QtGui.QAction(QtGui.QIcon('art/quit.png'), get_text('quit'), smallBar)
-quitAction.setShortcut('Ctrl+W')
-window.connect(quitAction, QtCore.SIGNAL('triggered()'), app, QtCore.SLOT('quit()'))
+    inplaceAction = QtGui.QAction(QtGui.QIcon('art/inplace.png'),
+            get_text('inplace'), smallBar)
+    inplaceAction.setShortcut('Ctrl+R')
+    window.connect(inplaceAction, QtCore.SIGNAL('triggered()'), process_inplace)
 
-smallBar.addAction(clearAction)
-smallBar.addAction(inplaceAction)
-smallBar.addAction(copyAction)
-smallBar.addAction(quitAction)
+    copyAction = QtGui.QAction(QtGui.QIcon('art/copy.png'),
+            get_text('copy'), smallBar)
+    copyAction.setShortcut('Ctrl+T')
+    window.connect(copyAction, QtCore.SIGNAL('triggered()'), copy)
 
-edithbox.addWidget(textArea)
-edithbox.addWidget(smallBar)
+    quitAction = QtGui.QAction(QtGui.QIcon('art/quit.png'),
+            get_text('quit'), smallBar)
+    quitAction.setShortcut('Ctrl+W')
+    window.connect(quitAction, QtCore.SIGNAL('triggered()'),
+            app, QtCore.SLOT('quit()'))
 
-hbox.addWidget(copyBtn)
-hbox.addStretch(1)
-hbox.addWidget(quitBtn)
+    smallBar.addAction(clearAction)
+    smallBar.addAction(inplaceAction)
+    smallBar.addAction(copyAction)
+    smallBar.addAction(quitAction)
 
-vbox.addLayout(edithbox)
-vbox.addSpacing(20)
-vbox.addLayout(hbox)
+    edithbox.addWidget(textArea)
+    edithbox.addWidget(smallBar)
 
-window.setLayout(vbox)
-window.show()
+    hbox.addWidget(copyBtn)
+    hbox.addStretch(1)
+    hbox.addWidget(quitBtn)
 
-exit_code = app.exec_()
-sys.exit(exit_code)
+    vbox.addLayout(edithbox)
+    vbox.addSpacing(20)
+    vbox.addLayout(hbox)
 
+    window.setLayout(vbox)
+    window.show()
+
+    exit_code = app.exec_()
+    sys.exit(exit_code)
+
+if __name__ == '__main__':
+    main()
