@@ -5,7 +5,7 @@
 
 class HarfForms:
     """
-        Forms of an arabic harf
+        Forms of an arabic harf (letter)
     """
     def __init__(self, standard, isolated, final, initial, medial, prev_connect, next_connect):
         self.standard = standard
@@ -17,15 +17,11 @@ class HarfForms:
         self.next_connect = next_connect
 
 harf_list = {}
-def add_harf(*args):
+def add_forms(*args):
     harf = HarfForms(*args)
     harf_list[harf.standard] = harf
-    harf_list[harf.isolated] = harf
-    harf_list[harf.initial] = harf
-    harf_list[harf.medial] = harf
-    harf_list[harf.final] = harf
     
-def get_harf(char):
+def get_forms(char):
     try:
         return harf_list[char]
     except:
@@ -37,9 +33,9 @@ def is_harf(char):
 
 def get_contextual_shape(prev, harf, next):
     """return unicode representation of contextual shape"""
-    prev = get_harf(prev)
-    harf = get_harf(harf)
-    next = get_harf(next)
+    prev = get_forms(prev)
+    harf = get_forms(harf)
+    next = get_forms(next)
     next_connection = harf.next_connect and next.prev_connect
     prev_connection = harf.prev_connect and prev.next_connect
     if next_connection and prev_connection: return harf.medial
@@ -121,66 +117,69 @@ def put_harakat(harakat_info, plain):
         
 # Harf Shapes list/table
 # Form:
-# add_harf(standard, isolated, final, initial, medial, connects to previous?, connects to next?)
+# add_forms(standard, isolated, final, initial, medial, connects to previous?, connects to next?)
 
+# Get the next unicode character
 next = lambda x: unichr(ord(x)+1)
 
-def add_connecting_harf(standard, isolated):
+def forms4(standard, isolated):
+    """Register a harf. short-cut to add_forms"""
     final = next(isolated)
     initial = next(final)
     medial = next(initial)
-    add_harf(standard, isolated, final, initial, medial, True, True)
+    add_forms(standard, isolated, final, initial, medial, True, True)
 
-def add_non_connecting_harf(standard, isolated):
+def forms2(standard, isolated):
+    """Register a harf that only has two forms. short-cut to add_forms"""
     final = next(isolated)
     initial = isolated
     medial = final
-    add_harf(standard, isolated, final, initial, medial, True, False)
+    add_forms(standard, isolated, final, initial, medial, True, False)
 
-add_harf(None, None, None, None, None, False, False)
+add_forms(None, None, None, None, None, False, False)
 # Lam-Aleft
-add_non_connecting_harf(u'\uFEFB', u'\uFEFB')
-add_non_connecting_harf(u'\uFEF9', u'\uFEF9')
-add_non_connecting_harf(u'\uFEF7', u'\uFEF7')
-add_non_connecting_harf(u'\uFEF5', u'\uFEF5')
+forms2(u'\uFEFB', u'\uFEFB')
+forms2(u'\uFEF9', u'\uFEF9')
+forms2(u'\uFEF7', u'\uFEF7')
+forms2(u'\uFEF5', u'\uFEF5')
 # Hamza groups
-add_non_connecting_harf(u'\u0622', u'\uFE81')
-add_non_connecting_harf(u'\u0623', u'\uFE83')
-add_non_connecting_harf(u'\u0624', u'\uFE85')
-add_non_connecting_harf(u'\u0625', u'\uFE87')
-add_connecting_harf(u'\u0626', u'\uFE89')
+forms2(u'\u0622', u'\uFE81')
+forms2(u'\u0623', u'\uFE83')
+forms2(u'\u0624', u'\uFE85')
+forms2(u'\u0625', u'\uFE87')
+forms4(u'\u0626', u'\uFE89')
 # Main letters
-add_non_connecting_harf(u'\u0627', u'\uFE8D')
-add_connecting_harf(u'\u0628', u'\uFE8F')
-add_connecting_harf(u'\u062A', u'\uFE95')
-add_connecting_harf(u'\u062B', u'\uFE99')
-add_connecting_harf(u'\u062C', u'\uFE9D')
-add_connecting_harf(u'\u062D', u'\uFEA1')
-add_connecting_harf(u'\u062E', u'\uFEA5')
-add_non_connecting_harf(u'\u062F', u'\uFEA9')
-add_non_connecting_harf(u'\u0630', u'\uFEAB')
-add_non_connecting_harf(u'\u0631', u'\uFEAD')
-add_non_connecting_harf(u'\u0632', u'\uFEAF')
-add_connecting_harf(u'\u0633', u'\uFEB1')
-add_connecting_harf(u'\u0634', u'\uFEB5')
-add_connecting_harf(u'\u0635', u'\uFEB9')
-add_connecting_harf(u'\u0636', u'\uFEBD')
-add_connecting_harf(u'\u0637', u'\uFEC1')
-add_connecting_harf(u'\u0638', u'\uFEC5')
-add_connecting_harf(u'\u0639', u'\uFEC9')
-add_connecting_harf(u'\u063A', u'\uFECD')
-add_connecting_harf(u'\u0641', u'\uFED1')
-add_connecting_harf(u'\u0642', u'\uFED5')
-add_connecting_harf(u'\u0643', u'\uFED9')
-add_connecting_harf(u'\u0644', u'\uFEDD')
-add_connecting_harf(u'\u0645', u'\uFEE1')
-add_connecting_harf(u'\u0646', u'\uFEE5')
-add_connecting_harf(u'\u0647', u'\uFEE9')
-add_non_connecting_harf(u'\u0648', u'\uFEED')
-add_connecting_harf(u'\u064A', u'\uFEF1')
+forms2(u'\u0627', u'\uFE8D')
+forms4(u'\u0628', u'\uFE8F')
+forms4(u'\u062A', u'\uFE95')
+forms4(u'\u062B', u'\uFE99')
+forms4(u'\u062C', u'\uFE9D')
+forms4(u'\u062D', u'\uFEA1')
+forms4(u'\u062E', u'\uFEA5')
+forms2(u'\u062F', u'\uFEA9')
+forms2(u'\u0630', u'\uFEAB')
+forms2(u'\u0631', u'\uFEAD')
+forms2(u'\u0632', u'\uFEAF')
+forms4(u'\u0633', u'\uFEB1')
+forms4(u'\u0634', u'\uFEB5')
+forms4(u'\u0635', u'\uFEB9')
+forms4(u'\u0636', u'\uFEBD')
+forms4(u'\u0637', u'\uFEC1')
+forms4(u'\u0638', u'\uFEC5')
+forms4(u'\u0639', u'\uFEC9')
+forms4(u'\u063A', u'\uFECD')
+forms4(u'\u0641', u'\uFED1')
+forms4(u'\u0642', u'\uFED5')
+forms4(u'\u0643', u'\uFED9')
+forms4(u'\u0644', u'\uFEDD')
+forms4(u'\u0645', u'\uFEE1')
+forms4(u'\u0646', u'\uFEE5')
+forms4(u'\u0647', u'\uFEE9')
+forms2(u'\u0648', u'\uFEED')
+forms4(u'\u064A', u'\uFEF1')
 # Letters that are not directly in the alphabet
-add_non_connecting_harf(u'\u0629', u'\uFE93')
-add_non_connecting_harf(u'\u0649', u'\uFEEF')
+forms2(u'\u0629', u'\uFE93')
+forms2(u'\u0649', u'\uFEEF')
 # tatweel
-add_harf(u'\u0640', u'\u0640', u'\u0640', u'\u0640', u'\u0640', True, True)
+add_forms(u'\u0640', u'\u0640', u'\u0640', u'\u0640', u'\u0640', True, True)
 
