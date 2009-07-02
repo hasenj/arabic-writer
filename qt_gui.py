@@ -69,11 +69,18 @@ def main():
         text = unicode(textArea.toPlainText())
         rtl = rtlize(text)
         textArea.setText(rtl)
-    quitBtn = QtGui.QPushButton(get_text('quit'))
-    window.connect(quitBtn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
 
     copyBtn = QtGui.QPushButton(get_text('copy'))
+    copyBtn.setMinimumSize(200, 80)
     window.connect(copyBtn, QtCore.SIGNAL('clicked()'), copy)
+
+    inplaceBtn = QtGui.QPushButton(get_text('inplace'))
+    inplaceBtn.setMinimumSize(200, 80)
+    window.connect(inplaceBtn, QtCore.SIGNAL('clicked()'), process_inplace)
+
+    helpBtn = QtGui.QPushButton(get_text('help'))
+    helpBtn.setMinimumSize(200, 80)
+    window.connect(helpBtn, QtCore.SIGNAL('clicked()'), help)
 
     clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), 
             get_text('reset'), smallBar)
@@ -112,9 +119,12 @@ def main():
     edithbox.addWidget(textArea)
     edithbox.addWidget(smallBar)
 
+    hbox.addStretch(2)
     hbox.addWidget(copyBtn)
+    hbox.addWidget(inplaceBtn)
     hbox.addStretch(1)
-    hbox.addWidget(quitBtn)
+    hbox.addWidget(helpBtn)
+    hbox.addStretch(4)
 
     vbox.addLayout(edithbox)
     vbox.addSpacing(20)

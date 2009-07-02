@@ -84,14 +84,18 @@ def mirror(string):
     if not string: return ""
     dir = get_dir(string[0])
     if dir == R:
-        # Fix parenthesis
-        swap = { '(':')', '[':']', '{':'}', ')':'(', ']':'[', '}':'{' }
-        string = ''.join((swap.get(char,char) for char in string))
         return string[::-1]
     return string
 
+def mirror_brackets(string):
+    """Mirror brackets"""
+    swap = { '(':')', '[':']', '{':'}', ')':'(', ']':'[', '}':'{' }
+    return ''.join((swap.get(char,char) for char in string))
+    
+
 def rtlize_line(string):
     string = forms.fuse(string)
+    string = mirror_brackets(string)
     segs = uni_segments(string)
     segs = [mirror(shape(seg)) for seg in segs]
     return ''.join(segs[::-1])
