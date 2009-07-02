@@ -32,9 +32,8 @@ def get_text(name):
     """Basic (read: naive) mechanism for multi-language UI"""
     return t_text[language][name]
 
-
-
 app = QtGui.QApplication(sys.argv)
+app.setLayoutDirection(QtCore.Qt.RightToLeft)
 
 # XXX: doesn't work right ..
 def setClipboardText(text):
@@ -54,13 +53,16 @@ hbox = QtGui.QHBoxLayout()
 edithbox = QtGui.QHBoxLayout()
 
 textArea = QtGui.QTextEdit()
+outText = QtGui.QTextEdit()
 smallBar = QtGui.QToolBar()
 smallBar.setOrientation(QtCore.Qt.Vertical)
 
 def copy():
     text = unicode(textArea.toPlainText())
     rtl = rtlize(text)
-    setClipboardText(rtl)
+    # setClipboardText(rtl)
+    outText.setText(rtl)
+    outText.copy()
 
 def process_inplace():
     text = unicode(textArea.toPlainText())
