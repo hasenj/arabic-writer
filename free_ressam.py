@@ -1,3 +1,3 @@
-﻿import gui
+﻿import wx_gui as gui
 gui.main()
 

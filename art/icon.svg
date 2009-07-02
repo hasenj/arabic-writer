@@ -17,7 +17,7 @@
    version="1.0"
    sodipodi:docname="icon.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="C:\code\arabic_writer\icon16.png"
+   inkscape:export-filename="C:\code\arabic_writer\art\icon.png"
    inkscape:export-xdpi="7.1999998"
    inkscape:export-ydpi="7.1999998">
   <sodipodi:namedview
@@ -31,8 +31,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.226"
-     inkscape:cx="249.92353"
-     inkscape:cy="-49.347464"
+     inkscape:cx="-24.954121"
+     inkscape:cy="-11.011412"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -143,6 +143,14 @@
      inkscape:label="Layer 1"
      transform="translate(1.2243103e-5,-7.3313713e-6)">
     <rect
+       style="opacity:1;fill:#f9ffff;fill-opacity:1;fill-rule:evenodd;stroke:#0ca159;stroke-width:0.48860483999999998;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2426"
+       width="200"
+       height="200"
+       x="0.24429017"
+       y="-0.24429509"
+       ry="0" />
+    <rect
        style="opacity:0.7;fill:#082992;fill-opacity:0.55319148;fill-rule:evenodd;stroke:#0ca159;stroke-width:1.22100008;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter3223)"
        id="rect5547"
        width="342.72067"
@@ -150,14 +158,6 @@
        x="321.97504"
        y="-99.776581"
        ry="57.653954"
-       transform="matrix(0.4563626,0.2783121,-0.2783121,0.4563626,-119.92583,-36.440975)" />
-    <rect
-       style="opacity:0;fill:#082992;fill-opacity:0.05319148;fill-rule:evenodd;stroke:#0ca159;stroke-width:0.48860484;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect2426"
-       width="199.5114"
-       height="199.5114"
-       x="0.24430242"
-       y="0.24431017"
-       ry="23.137453" />
+       transform="matrix(0.3700731,0.2256886,-0.2256886,0.3700731,-72.054772,-9.1802167)" />
   </g>
 </svg>
