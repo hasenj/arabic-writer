@@ -35,10 +35,21 @@ window = QtGui.QWidget()
 window.resize(250, 150)
 window.setWindowTitle('Qt Window')
 window.setWindowIcon(QtGui.QIcon('art/icon.png'))
-quit_btn = QtGui.QPushButton(get_text('quit'), window)
-quit_btn.setGeometry(10, 10, 60, 35)
-window.connect(quit_btn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
 
+vbox = QtGui.QVBoxLayout()
+hbox = QtGui.QHBoxLayout()
+
+quit_btn = QtGui.QPushButton(get_text('quit'))
+window.connect(quit_btn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
+textArea = QtGui.QTextEdit()
+
+hbox.addStretch(1)
+hbox.addWidget(quit_btn)
+
+vbox.addWidget(textArea)
+vbox.addLayout(hbox)
+
+window.setLayout(vbox)
 window.show()
 
 sys.exit(app.exec_())
