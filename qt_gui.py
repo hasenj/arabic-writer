@@ -2,7 +2,6 @@
 import sys
 import webbrowser
 from process import rtlize
-from clipboard import setcbtext
 from PyQt4 import QtGui, QtCore
 
 language = 'arabic'
@@ -59,7 +58,7 @@ smallBar.setOrientation(QtCore.Qt.Vertical)
 def copy():
     text = unicode(textArea.toPlainText())
     rtl = rtlize(text)
-    setcbtext(rtl)
+    setClipboardText(rtl)
 
 def process_inplace():
     text = unicode(textArea.toPlainText())
@@ -69,7 +68,7 @@ quitBtn = QtGui.QPushButton(get_text('quit'))
 window.connect(quitBtn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
 
 copyBtn = QtGui.QPushButton(get_text('copy'))
-window.connect(quitBtn, QtCore.SIGNAL('clicked()'), copy)
+window.connect(copyBtn, QtCore.SIGNAL('clicked()'), copy)
 
 clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), get_text('reset'), smallBar)
 window.connect(clearAction, QtCore.SIGNAL('triggered()'), textArea, QtCore.SLOT('clear()'))
