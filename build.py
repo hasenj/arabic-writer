@@ -45,7 +45,7 @@ def do_exe():
                 includes=['sip'],
                 compressed=True, 
                 dist_dir=dest,
-                bundle_files=1
+                # bundle_files=3
                 )),
         zipfile = None,
         data_files = [ 
