@@ -66,8 +66,16 @@ def main():
     edithbox = QtGui.QHBoxLayout()
 
     textArea = QtGui.QTextEdit()
-    smallBar = QtGui.QToolBar()
-    smallBar.setOrientation(QtCore.Qt.Vertical)
+    textBar = QtGui.QToolBar()
+    textBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+    textBar.setIconSize(QtCore.QSize(30, 30))
+    textBar.setFloatable(False)
+    textBar.setMovable(False)
+
+
+    toolBar = QtGui.QToolBar()
+    toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+    toolBar.setIconSize(QtCore.QSize(50, 50))
 
     def help():
         help_doc = get_text('help_doc')
@@ -83,74 +91,45 @@ def main():
         rtl = rtlize(text)
         textArea.setText(rtl)
 
-    copyBtn = QtGui.QPushButton(get_text('copy'))
-    copyBtn.setMinimumSize(200, 80)
-    window.connect(copyBtn, QtCore.SIGNAL('clicked()'), copy)
-
-    inplaceBtn = QtGui.QPushButton(get_text('inplace'))
-    inplaceBtn.setMinimumSize(200, 80)
-    window.connect(inplaceBtn, QtCore.SIGNAL('clicked()'), process_inplace)
-
-    quitBtn = QtGui.QPushButton(get_text('quit'))
-    quitBtn.setMinimumSize(200, 80)
-    window.connect(quitBtn, QtCore.SIGNAL('clicked()'), app, QtCore.SLOT('quit()'))
-
-    helpBtn = QtGui.QPushButton(get_text('help'))
-    helpBtn.setMinimumSize(400, 40)
-    window.connect(helpBtn, QtCore.SIGNAL('clicked()'), help)
-
     clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), 
-            get_text('reset'), smallBar)
+            get_text('reset'), window)
     clearAction.setShortcut('Ctrl+E')
     window.connect(clearAction, QtCore.SIGNAL('triggered()'),
             textArea, QtCore.SLOT('clear()'))
 
     inplaceAction = QtGui.QAction(QtGui.QIcon('art/inplace.png'),
-            get_text('inplace'), smallBar)
+            get_text('inplace'), window)
     inplaceAction.setShortcut('Ctrl+R')
     window.connect(inplaceAction, QtCore.SIGNAL('triggered()'), process_inplace)
 
     copyAction = QtGui.QAction(QtGui.QIcon('art/copy.png'),
-            get_text('copy'), smallBar)
+            get_text('copy'), window)
     copyAction.setShortcut('Ctrl+T')
     window.connect(copyAction, QtCore.SIGNAL('triggered()'), copy)
 
     helpAction = QtGui.QAction(QtGui.QIcon('art/help.png'), 
-            get_text('help'), smallBar)
+            get_text('help'), window)
     helpAction.setShortcut('Ctrl+H')
     helpAction.setShortcut('F1')
     window.connect(helpAction, QtCore.SIGNAL('triggered()'), help)
 
     quitAction = QtGui.QAction(QtGui.QIcon('art/quit.png'),
-            get_text('quit'), smallBar)
+            get_text('quit'), window)
     quitAction.setShortcut('Ctrl+W')
     window.connect(quitAction, QtCore.SIGNAL('triggered()'),
             app, QtCore.SLOT('quit()'))
 
-    smallBar.addAction(clearAction)
-    smallBar.addAction(inplaceAction)
-    smallBar.addAction(copyAction)
-    smallBar.addAction(quitAction)
-    smallBar.addAction(helpAction)
+    textBar.addAction(clearAction)
+    textBar.addAction(inplaceAction)
+    textBar.addAction(copyAction)
 
-    edithbox.addWidget(textArea)
-    edithbox.addWidget(smallBar)
+    toolBar.addAction(quitAction)
+    toolBar.addAction(helpAction)
 
-    hbox1.addStretch(1)
-    hbox1.addWidget(copyBtn)
-    hbox1.addWidget(inplaceBtn)
-    hbox1.addStretch(2)
-    hbox1.addWidget(quitBtn)
-    hbox1.addStretch(1)
-
-    hbox2.addStretch(1)
-    hbox2.addWidget(helpBtn)
-    hbox2.addStretch(1)
-
-    vbox.addLayout(edithbox)
+    vbox.addWidget(textArea)
+    vbox.addWidget(textBar)
     vbox.addSpacing(20)
-    vbox.addLayout(hbox1)
-    vbox.addLayout(hbox2)
+    vbox.addWidget(toolBar)
 
     window.setLayout(vbox)
     window.show()
