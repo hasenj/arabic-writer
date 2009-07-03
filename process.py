@@ -45,20 +45,30 @@ def uni_segments(string):
     and each N char into its own segment 
     """
     segments = [""]
-    dir = N
-    prev = N
+    dir = R
+    prev = R
     for context in iter_context(string):
         _, char, _ = context
-        _, dir, next = [get_dir(c) for c in context]
-        if dir == prev or (dir == N and next in [N, prev]):
+        real_prev, dir, next = [get_dir(c) for c in context]
+        if ((dir == prev) or 
+            (dir == N and next in [N, prev])):
             segments[-1] += char # Append to current segment
             dir = prev
         else:
             segments += [char] # New segment
-            dir = next
         prev = dir
     return segments
         
+def get_segment_direction(string):
+    """Find the direction of a uni-directional segment
+    by finding the first non-N character, or returning N
+    """
+    for char in string:
+        dir = get_dir(char)
+        if dir in [L,R]:
+            return dir
+    return N
+
 def shape_plain(string):
     """Substitute Arabic letters with a form that represents their shape
     depending on their context.
@@ -79,23 +89,22 @@ def shape(string):
     plain = shape_plain(plain)
     return forms.put_harakat(harakat_info, plain)
 
-def mirror(string):
-    """Assumes string is a uni-directional segment; reverses an R string"""
-    if not string: return ""
-    dir = get_dir(string[0])
-    if dir == R:
-        return string[::-1]
-    return string
-
 def mirror_brackets(string):
     """Mirror brackets"""
     swap = { '(':')', '[':']', '{':'}', ')':'(', ']':'[', '}':'{' }
     return ''.join((swap.get(char,char) for char in string))
-    
+
+def mirror(string):
+    """Assumes string is a uni-directional segment; reverses an R string"""
+    if not string: return ""
+    dir = get_segment_direction(string)
+    if dir in [R,N]:
+        string = mirror_brackets(string)
+        return string[::-1]
+    return string
 
 def rtlize_line(string):
     string = forms.fuse(string)
-    string = mirror_brackets(string)
     segs = uni_segments(string)
     segs = [mirror(shape(seg)) for seg in segs]
     return ''.join(segs[::-1])
