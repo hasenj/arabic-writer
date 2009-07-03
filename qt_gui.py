@@ -15,6 +15,7 @@ t_text = dict(
             quit = u'خروج',
             help = u'تعليمات',
             help_doc = 'help_arabic.html',
+            lang = u'English',
             ),
         english = dict(
             title = 'The Free Ressam (Er Ressam il Hur)',
@@ -24,6 +25,7 @@ t_text = dict(
             quit = 'Quit',
             help = 'Help',
             help_doc = 'help_english.html',
+            lang = 'عربي'
                    )
         )
 
@@ -68,14 +70,14 @@ def main():
     textArea = QtGui.QTextEdit()
     textBar = QtGui.QToolBar()
     textBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-    textBar.setIconSize(QtCore.QSize(30, 30))
+    textBar.setIconSize(QtCore.QSize(50, 50))
     textBar.setFloatable(False)
     textBar.setMovable(False)
 
 
     toolBar = QtGui.QToolBar()
     toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-    toolBar.setIconSize(QtCore.QSize(50, 50))
+    toolBar.setIconSize(QtCore.QSize(30, 30))
 
     def help():
         help_doc = get_text('help_doc')
@@ -119,9 +121,10 @@ def main():
     window.connect(quitAction, QtCore.SIGNAL('triggered()'),
             app, QtCore.SLOT('quit()'))
 
-    textBar.addAction(clearAction)
-    textBar.addAction(inplaceAction)
+
     textBar.addAction(copyAction)
+    textBar.addAction(inplaceAction)
+    textBar.addAction(clearAction)
 
     toolBar.addAction(quitAction)
     toolBar.addAction(helpAction)
