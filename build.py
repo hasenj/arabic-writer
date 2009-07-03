@@ -90,6 +90,12 @@ print "--------------------"
 main = 'free_ressam_eng.py'
 do_exe()
 
+
+print "\n"
+print "Exporting Source Code"
+print "--------------------"
+os.system("git checkout-index -a -f --prefix=" + dest + "/src/")
+
 print "\n"
 print "Creating 7z archive: "
 print "--------------------"
