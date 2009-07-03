@@ -66,7 +66,6 @@ def main():
     edithbox = QtGui.QHBoxLayout()
 
     textArea = QtGui.QTextEdit()
-    outText = QtGui.QTextEdit()
     smallBar = QtGui.QToolBar()
     smallBar.setOrientation(QtCore.Qt.Vertical)
 
