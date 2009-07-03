@@ -3,6 +3,9 @@
 """
 import os
 
+# Magic value, don't touch
+__build__ = 50
+
 # This is used to preserve XP/Vista look and feel
 # Don't ask me why, but without this, it will look ugly
 manifest = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -31,7 +34,7 @@ manifest = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 main = 'free_ressam.py'
 dest = 'free_ressam'
-dest_7z = 'free_ressam.7z'
+dest_7z = 'free_ressam_build_%d.7z' % __build__
 
 def do_exe():
  setup(
@@ -43,11 +46,11 @@ def do_exe():
             py2exe=dict(
                 optimize=2, 
                 includes=['sip'],
-                compressed=True, 
+                # compressed=True, 
                 dist_dir=dest,
                 # bundle_files=3
                 )),
-        zipfile = None,
+        # zipfile = None,
         data_files = [ 
             ('docs', ['docs/logo.png']),
             ('docs', ['docs/help_arabic.html']),
@@ -64,16 +67,17 @@ def do_exe():
         )   
 
 import sys
-sys.argv = [sys.argv[0]] + ["py2exe"]
+sys.argv = [sys.argv[0], "py2exe"]
 
 from distutils.core import setup
 import py2exe
 
+print "Buiding The Free Ressam (Er Ressam il Hur)"
+print "Build", __build__
 print "\n"
 print "Cleaning previous build"
 print "--------------------"
 os.system("rm -rf " + dest) 
-os.system("rm " + dest_7z)
 
 print "\n"
 print "Arabic build: "
@@ -86,16 +90,12 @@ print "--------------------"
 main = 'free_ressam_eng.py'
 do_exe()
 
-#print "\n"
-#print "Copying docs: "
-#print "--------------------"
-#doc_dest = os.path.join(dest, "docs")
-#os.system("mkdir " + doc_dest)
-#os.system("cp -r docs " + doc_dest)
-
 print "\n"
 print "Creating 7z archive: "
 print "--------------------"
 os.system("7za a " + dest_7z + " " + dest)
 
-
+print "\n"
+print "Cleaning build files"
+print "--------------------"
+os.system("rm -rf build")
