@@ -68,6 +68,8 @@ def main():
     edithbox = QtGui.QHBoxLayout()
 
     textArea = QtGui.QTextEdit()
+    textArea.setFont(QtGui.QFont("Arial", 12, 75))
+
     textBar = QtGui.QToolBar()
     textBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
     textBar.setIconSize(QtCore.QSize(50, 50))
@@ -89,9 +91,15 @@ def main():
         setClipboardText(rtl)
 
     def process_inplace():
+        # remember cursor position
+        cursor = textArea.textCursor()
+        # process inplace
         text = unicode(textArea.toPlainText())
         rtl = rtlize(text)
         textArea.setText(rtl)
+        # restore cursor
+        textArea.setTextCursor(cursor)
+        
 
     clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), 
             get_text('reset'), window)
