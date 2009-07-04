@@ -1,7 +1,7 @@
 ﻿import os
 import sys
 import webbrowser
-from process import rtlize
+from process import rtlize, restore
 from PyQt4 import QtGui, QtCore
 
 language = 'arabic'
@@ -11,7 +11,7 @@ t_text = dict(
             title = u'الرسام الحر',
             copy = u'نسخ',
             reset = u'مسح',
-            inplace = u'معالجة النص في مكانه',
+            restore = u'معالجة عكسية',
             quit = u'خروج',
             help = u'تعليمات',
             help_doc = 'help_arabic.html',
@@ -21,7 +21,7 @@ t_text = dict(
             title = 'The Free Ressam (Er Ressam il Hur)',
             copy = 'Copy',
             reset = 'Reset',
-            inplace = 'Process InPlace',
+            restore = 'Reverse Process',
             quit = 'Quit',
             help = 'Help',
             help_doc = 'help_english.html',
@@ -37,7 +37,7 @@ shortcuts = dict(
         copy = 'Ctrl+T',
         reset = 'Ctrl+E',
         quit = 'Ctrl+W',
-        inplace = 'Ctrl+R',
+        restore = 'Ctrl+R',
         )
 
 def get_shortcut(name):
@@ -90,13 +90,14 @@ def main():
         rtl = rtlize(text)
         setClipboardText(rtl)
 
-    def process_inplace():
+    def unprocess():
+        # TODO
         # remember cursor position
         cursor = textArea.textCursor()
-        # process inplace
+        # Restore text
         text = unicode(textArea.toPlainText())
-        rtl = rtlize(text)
-        textArea.setText(rtl)
+        restored = restore(text)
+        textArea.setText(restored)
         # restore cursor
         textArea.setTextCursor(cursor)
         
@@ -107,10 +108,10 @@ def main():
     window.connect(clearAction, QtCore.SIGNAL('triggered()'),
             textArea, QtCore.SLOT('clear()'))
 
-    inplaceAction = QtGui.QAction(QtGui.QIcon('art/inplace.png'),
-            get_text('inplace'), window)
-    inplaceAction.setShortcut('Ctrl+R')
-    window.connect(inplaceAction, QtCore.SIGNAL('triggered()'), process_inplace)
+    restoreAction = QtGui.QAction(QtGui.QIcon('art/restore.png'),
+            get_text('restore'), window)
+    restoreAction.setShortcut('Ctrl+R')
+    window.connect(restoreAction, QtCore.SIGNAL('triggered()'), unprocess)
 
     copyAction = QtGui.QAction(QtGui.QIcon('art/copy.png'),
             get_text('copy'), window)
@@ -131,7 +132,7 @@ def main():
 
 
     textBar.addAction(copyAction)
-    textBar.addAction(inplaceAction)
+    textBar.addAction(restoreAction)
     textBar.addAction(clearAction)
 
     toolBar.addAction(quitAction)

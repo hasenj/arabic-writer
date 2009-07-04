@@ -17,9 +17,14 @@ class HarfForms:
         self.next_connect = next_connect
 
 harf_list = {}
+rev_list = {}
 def add_forms(*args):
     harf = HarfForms(*args)
     harf_list[harf.standard] = harf
+    rev_list[harf.isolated] = harf.standard
+    rev_list[harf.final] = harf.standard
+    rev_list[harf.initial] = harf.standard
+    rev_list[harf.medial] = harf.standard
     
 def get_forms(char):
     try:
@@ -55,6 +60,12 @@ def fuse(string):
     for merge in merges:
         string = string.replace(merge[0], merge[1])
     return string
+
+def reverse_process(string):
+    """unprocess processed characters"""
+    return ''.join(rev_list.get(char, char) for char in string)
+
+
 
 harakat_ranges = [ # Note: ranges are inclusive
         (u'\u0610', u'\u061A'),

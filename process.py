@@ -103,15 +103,28 @@ def mirror(string):
         return string[::-1]
     return string
 
+def func_lines(string, func):
+    """Apply a function to multiple lines in reverse"""
+    return '\r\n'.join([func(line) for line in string.splitlines()])
+    
 def rtlize_line(string):
     string = forms.fuse(string)
     segs = uni_segments(string)
     segs = [mirror(shape(seg)) for seg in segs]
-    return ''.join(segs[::-1])
+    string = ''.join(segs[::-1])
+    return string
 
 def rtlize(string):
     """Call this on a raw string, and it will process it"""
-    return '\r\n'.join([rtlize_line(line) for line in string.splitlines()])
+    return func_lines(string, rtlize_line)
+
+def restore_line(string):
+    """Restore a string by reverse-processing it"""
+    return "wops  " + string
+
+def restore(string):
+    """Reverse Processing"""
+    return func_lines(string, restore_line)
 
 if __name__ == '__main__':
     print "Testing"
