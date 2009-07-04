@@ -4,7 +4,7 @@
 import os
 
 # Magic value, don't touch
-__build__ = 51
+__build__ = 52
 
 # This is used to preserve XP/Vista look and feel
 # Don't ask me why, but without this, it will look ugly
