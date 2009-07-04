@@ -94,7 +94,7 @@ def mirror_brackets(string):
     swap = { '(':')', '[':']', '{':'}', ')':'(', ']':'[', '}':'{' }
     return ''.join((swap.get(char,char) for char in string))
 
-def mirror(string):
+def mirror_segment(string):
     """Assumes string is a uni-directional segment; reverses an R string"""
     if not string: return ""
     dir = get_segment_direction(string)
@@ -103,24 +103,36 @@ def mirror(string):
         return string[::-1]
     return string
 
+def mirror(string):
+    """Mirror a whole string, by dividing it into segments first"""
+    segs = uni_segments(string)
+    segs = [mirror_segment(seg) for seg in segs]
+    return ''.join(segs[::-1])
+
 def func_lines(string, func):
     """Apply a function to multiple lines in reverse"""
     return '\r\n'.join([func(line) for line in string.splitlines()])
     
 def rtlize_line(string):
     string = forms.fuse(string)
-    segs = uni_segments(string)
-    segs = [mirror(shape(seg)) for seg in segs]
-    string = ''.join(segs[::-1])
+    string = shape(string)
+    string = mirror(string)
     return string
 
 def rtlize(string):
     """Call this on a raw string, and it will process it"""
     return func_lines(string, rtlize_line)
 
+def unshape(string):
+    """convert shaped characters back to standard characters"""
+    return ''.join(forms.get_std_shape(char) for char in string)
+
 def restore_line(string):
     """Restore a string by reverse-processing it"""
-    return "wops  " + string
+    string = mirror(string)
+    string = unshape(string)
+    string = forms.unfuse(string)
+    return string
 
 def restore(string):
     """Reverse Processing"""

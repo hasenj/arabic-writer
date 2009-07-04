@@ -61,10 +61,15 @@ def fuse(string):
         string = string.replace(merge[0], merge[1])
     return string
 
-def reverse_process(string):
-    """unprocess processed characters"""
-    return ''.join(rev_list.get(char, char) for char in string)
+def unfuse(string):
+    """Break-apart lam-alef merges"""
+    for merge in merges:
+        string = string.replace(merge[1], merge[0])
+    return string
 
+def get_std_shape(char):
+    """unprocess processed characters"""
+    return rev_list.get(char, char)
 
 
 harakat_ranges = [ # Note: ranges are inclusive

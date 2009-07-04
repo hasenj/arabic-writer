@@ -61,7 +61,7 @@ def do_exe():
             ('art', ['art/help.png']),
             ('art', ['art/clear.png']),
             ('art', ['art/copy.png']),
-            ('art', ['art/inplace.png']),
+            ('art', ['art/restore.png']),
             ('art', ['art/quit.png']),
             ],
         )   
