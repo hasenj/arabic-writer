@@ -1,4 +1,8 @@
-﻿import os
+﻿"""
+    Author: Hasen il Judy
+    License: GPL v2
+"""
+import os
 import sys
 import webbrowser
 from process import rtlize, restore
@@ -91,8 +95,7 @@ def main():
         setClipboardText(rtl)
 
     def unprocess():
-        # TODO
-        # remember cursor position
+        # remember cursor position (doesn't really work, oh well)
         cursor = textArea.textCursor()
         # Restore text
         text = unicode(textArea.toPlainText())

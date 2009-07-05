@@ -68,7 +68,7 @@ def unfuse(string):
     return string
 
 def get_std_shape(char):
-    """unprocess processed characters"""
+    """The opposite of get_contextual_shape"""
     return rev_list.get(char, char)
 
 
@@ -131,9 +131,6 @@ def put_harakat(harakat_info, plain):
             http://www.unicode.org/charts/PDF/UFE70.pdf
 """
         
-# Harf Shapes list/table
-# Form:
-# add_forms(standard, isolated, final, initial, medial, connects to previous?, connects to next?)
 
 # Get the next unicode character
 next = lambda x: unichr(ord(x)+1)
@@ -151,6 +148,8 @@ def forms2(standard, isolated):
     initial = isolated
     medial = final
     add_forms(standard, isolated, final, initial, medial, True, False)
+
+# Listing all arabic letters and their shapes
 
 add_forms(None, None, None, None, None, False, False)
 # Lam-Aleft

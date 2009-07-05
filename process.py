@@ -42,7 +42,7 @@ def uni_segments(string):
 
     Put sequential R chars into a segment, 
     sequential L chars into a segment,
-    and each N char into its own segment 
+    and each N char into its own segment #TODO this comment is out of date, or is my code buggy because it ignored this rule??
     """
     segments = [""]
     dir = R
@@ -104,7 +104,7 @@ def mirror_segment(string):
     return string
 
 def mirror(string):
-    """Mirror a whole string, by dividing it into segments first"""
+    """Mirror a whole string, by dividing it into segments first and calling mirror_segment on each segment."""
     segs = uni_segments(string)
     segs = [mirror_segment(seg) for seg in segs]
     return ''.join(segs[::-1])
@@ -114,13 +114,14 @@ def func_lines(string, func):
     return '\r\n'.join([func(line) for line in string.splitlines()])
     
 def rtlize_line(string):
+    """Process a single-line string"""
     string = forms.fuse(string)
     string = shape(string)
     string = mirror(string)
     return string
 
 def rtlize(string):
-    """Call this on a raw string, and it will process it"""
+    """Call this on a raw string (multiple lines), and it will process it"""
     return func_lines(string, rtlize_line)
 
 def unshape(string):
@@ -128,18 +129,14 @@ def unshape(string):
     return ''.join(forms.get_std_shape(char) for char in string)
 
 def restore_line(string):
-    """Restore a string by reverse-processing it"""
+    """Restore a string by reverse-processing it (single line)"""
     string = mirror(string)
     string = unshape(string)
     string = forms.unfuse(string)
     return string
 
 def restore(string):
-    """Reverse Processing"""
+    """Reverse Processing, applied to several lines"""
     return func_lines(string, restore_line)
 
-if __name__ == '__main__':
-    print "Testing"
-    print rtlize("hello")
-    print rtlize("تجربة")
 
