@@ -5,7 +5,7 @@
 import os
 import sys
 import webbrowser
-from process import rtlize, restore
+from arabic_rtlize import rtlize, un_rtlize
 from PyQt4 import QtGui, QtCore
 
 language = 'arabic'
@@ -40,8 +40,9 @@ def get_text(name):
 shortcuts = dict(
         copy = 'Ctrl+T',
         reset = 'Ctrl+E',
-        quit = 'Ctrl+W',
+        quit = 'Ctrl+Q',
         restore = 'Ctrl+R',
+        help = 'Ctrl+H',
         )
 
 def get_shortcut(name):
@@ -99,7 +100,7 @@ def main():
         cursor = textArea.textCursor()
         # Restore text
         text = unicode(textArea.toPlainText())
-        restored = restore(text)
+        restored = un_rtlize(text)
         textArea.setText(restored)
         # restore cursor
         textArea.setTextCursor(cursor)
@@ -107,29 +108,29 @@ def main():
 
     clearAction = QtGui.QAction(QtGui.QIcon('art/clear.png'), 
             get_text('reset'), window)
-    clearAction.setShortcut('Ctrl+E')
+    clearAction.setShortcut(get_shortcut('reset'))
     window.connect(clearAction, QtCore.SIGNAL('triggered()'),
             textArea, QtCore.SLOT('clear()'))
 
     restoreAction = QtGui.QAction(QtGui.QIcon('art/restore.png'),
             get_text('restore'), window)
-    restoreAction.setShortcut('Ctrl+R')
+    restoreAction.setShortcut(get_shortcut('restore'))
     window.connect(restoreAction, QtCore.SIGNAL('triggered()'), unprocess)
 
     copyAction = QtGui.QAction(QtGui.QIcon('art/copy.png'),
             get_text('copy'), window)
-    copyAction.setShortcut('Ctrl+T')
+    copyAction.setShortcut(get_shortcut('copy'))
     window.connect(copyAction, QtCore.SIGNAL('triggered()'), copy)
 
     helpAction = QtGui.QAction(QtGui.QIcon('art/help.png'), 
             get_text('help'), window)
-    helpAction.setShortcut('Ctrl+H')
+    # helpAction.setShortcut(get_shortcut('help'))
     helpAction.setShortcut('F1')
     window.connect(helpAction, QtCore.SIGNAL('triggered()'), help)
 
     quitAction = QtGui.QAction(QtGui.QIcon('art/quit.png'),
             get_text('quit'), window)
-    quitAction.setShortcut('Ctrl+W')
+    quitAction.setShortcut(get_shortcut('quit'))
     window.connect(quitAction, QtCore.SIGNAL('triggered()'),
             app, QtCore.SLOT('quit()'))
 

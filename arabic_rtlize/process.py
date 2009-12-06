@@ -1,8 +1,8 @@
 ﻿"""
     Author: Hasen il Judy
-    License: GPL v2
+    License: GPL v2 or LGPL v2.1
 """
-import forms
+import arabic_rtlize.forms as forms
        
 def iter_context(string):
     """Iterate over a string, returning a context, not just a letter
